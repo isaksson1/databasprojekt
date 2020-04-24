@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Anteckningar</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center; color: white;">Isaks Antecknings sida</h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center; color: white;">Du har för närvarande inga anteckningar. Lägg till nedan!</h4>
+    {% else %}
+    <table id="sparat">
+        <tr>
+            <th>Anteckningar <i class="far fa-sticky-note"></i></th>
+            <th>När de lades till <i class="far fa-clock"></i>
+            </th>
+            <th>Ändra <i class='fas fa-pencil-alt'></i></th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td style="white-space: pre-line">{{ task.content }}</td>
+                <td><div>{{ task.date_created.date() }}</div></td>
+                <td>
+                    <div class="redigeralinks"><a href="/delete/{{task.id}}">Radera</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Redigera</a></div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+            </div><div class="ikon"> <i class='fas fa-pencil-alt'></i></div>
+            <textarea rows = "10" type="text" name="content" id="content" > </textarea>
+            <button type="submit" value="Skapa Anteckning" id="skickaknapp">Spara</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
